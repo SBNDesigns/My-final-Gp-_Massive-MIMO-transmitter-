@@ -1,0 +1,8 @@
+################################################
+#                                              #
+# Silicon Perspective, A Cadence Company       #
+# FirstEncounter Design Restore script         #
+#    for design session: /home/ahesham/chain_1/system_pnr/pnr/MIMO_placement.enc                     
+#                                              #
+################################################
+restoreDesign /home/ahesham/chain_1/system_pnr/pnr/MIMO_placement.enc.dat MIMO

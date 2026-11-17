@@ -1,0 +1,982 @@
+                                        
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+                                        
+                 Version K-2015.06 for linux64 - May 28, 2015 
+                                        
+                    Copyright (c) 1988 - 2015 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+Initializing...
+Initializing gui preferences from file  /home/IC/.synopsys_dv_prefs.tcl
+####################################################################################
+# "Compile Hard, Grade Easy" Synthesis Script
+########################### Define Top Module ############################
+set top_module  MIMO
+MIMO
+set_svf  chain.svf
+1
+##################### Define Working Library Directory ######################
+define_design_lib work -path ./work
+1
+################## Design Compiler Library Files #setup ######################
+lappend search_path /home/IC/chain_test/std_cells
+. /opt/Synopsys/Synplify2015/libraries/syn /opt/Synopsys/Synplify2015/minpower/syn /opt/Synopsys/Synplify2015/dw/syn_ver /opt/Synopsys/Synplify2015/dw/sim_ver /home/IC/chain_test/std_cells
+lappend search_path /home/IC/chain_test/RTL
+. /opt/Synopsys/Synplify2015/libraries/syn /opt/Synopsys/Synplify2015/minpower/syn /opt/Synopsys/Synplify2015/dw/syn_ver /opt/Synopsys/Synplify2015/dw/sim_ver /home/IC/chain_test/std_cells /home/IC/chain_test/RTL
+set SSLIB "scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
+scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db
+set TTLIB "scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
+scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db
+set FFLIB "scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
+scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db
+## Standard Cell libraries 
+set target_library [list $SSLIB $TTLIB $FFLIB]
+scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db
+## Standard Cell & Hard Macros libraries 
+set link_library [list * $SSLIB $TTLIB $FFLIB]  
+* scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db
+#echo "###############################################"
+#echo "############# Reading RTL Files  ##############"
+#echo "###############################################"
+#Chain Files
+set file_format verilog
+verilog
+analyze -format verilog [glob /home/IC/chain_test/RTL/*.v]
+Running PRESTO HDLC
+Compiling source file /home/IC/chain_test/RTL/up_sample_2.v
+Compiling source file /home/IC/chain_test/RTL/counter_2bit.v
+Compiling source file /home/IC/chain_test/RTL/counter_1bit.v
+Compiling source file /home/IC/chain_test/RTL/DUC.v
+Compiling source file /home/IC/chain_test/RTL/mux4_to_1.v
+Compiling source file /home/IC/chain_test/RTL/comb.v
+Compiling source file /home/IC/chain_test/RTL/HFB_Comb4_Comb4.v
+Compiling source file /home/IC/chain_test/RTL/segma_1.v
+Compiling source file /home/IC/chain_test/RTL/phase_shifter.v
+Compiling source file /home/IC/chain_test/RTL/chain.v
+Compiling source file /home/IC/chain_test/RTL/ClkDiv.v
+Presto compilation completed successfully.
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db'
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db'
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db'
+1
+elaborate -lib work MIMO
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/gtech.db'
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/standard.sldb'
+  Loading link library 'scmetro_tsmc_cl013g_rvt_ss_1p08v_125c'
+  Loading link library 'scmetro_tsmc_cl013g_rvt_tt_1p2v_25c'
+  Loading link library 'scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'MIMO'.
+Information: Building the design 'ClkDiv'. (HDL-193)
+
+Inferred memory devices in process
+	in routine ClkDiv line 32 in file
+		'/home/IC/chain_test/RTL/ClkDiv.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  odd_edge_tog_reg   | Flip-flop |   1   |  N  | N  | N  | Y  | N  | N  | N  |
+|     div_clk_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   7   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'FIR'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'segma'. (HDL-193)
+
+Inferred memory devices in process
+	in routine segma line 23 in file
+		'/home/IC/chain_test/RTL/segma_1.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      acc2_reg       | Flip-flop |  18   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    out_1bit_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      acc1_reg       | Flip-flop |  18   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'DUC'. (HDL-193)
+
+Statistics for case statements in always block at line 9 in file
+	'/home/IC/chain_test/RTL/DUC.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            22            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine DUC line 9 in file
+		'/home/IC/chain_test/RTL/DUC.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     counter_reg     | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     SYS_out_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      I_reg_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      Q_reg_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'hfb_1'. (HDL-193)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:19: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:21: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:23: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:25: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:28: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:30: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:32: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:34: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/up_sample_2.v:58: signed to unsigned part selection occurs. (VER-318)
+
+Inferred memory devices in process
+	in routine hfb_1 line 45 in file
+		'/home/IC/chain_test/RTL/up_sample_2.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|        d_reg        | Flip-flop |  256  |  Y  | N  | Y  | N  | N  | N  | N  |
+|     odd_out_reg     | Flip-flop |  16   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    even_out_reg     | Flip-flop |  16   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'counter'. (HDL-193)
+
+Inferred memory devices in process
+	in routine counter line 7 in file
+		'/home/IC/chain_test/RTL/counter_1bit.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|       SEL_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'up4_filter'. (HDL-193)
+Warning:  /home/IC/chain_test/RTL/comb.v:23: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:24: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:25: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:26: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:45: signed to unsigned part selection occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:46: signed to unsigned part selection occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:47: signed to unsigned part selection occurs. (VER-318)
+Warning:  /home/IC/chain_test/RTL/comb.v:48: signed to unsigned part selection occurs. (VER-318)
+
+Inferred memory devices in process
+	in routine up4_filter line 10 in file
+		'/home/IC/chain_test/RTL/comb.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      x_n1_reg       | Flip-flop |  16   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      x_n3_reg       | Flip-flop |  16   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      x_n2_reg       | Flip-flop |  16   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'counter2bit'. (HDL-193)
+
+Inferred memory devices in process
+	in routine counter2bit line 7 in file
+		'/home/IC/chain_test/RTL/counter_2bit.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      count_reg      | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'mux4to1'. (HDL-193)
+Warning:  /home/IC/chain_test/RTL/mux4_to_1.v:11: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 10 in file
+	'/home/IC/chain_test/RTL/mux4_to_1.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            11            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+1
+###################### Defining toplevel ###################################
+current_design $top_module
+Current design is 'MIMO'.
+{MIMO}
+#################### Liniking All The Design Parts #########################
+puts "###############################################"
+###############################################
+puts "######## Liniking All The Design Parts ########"
+######## Liniking All The Design Parts ########
+puts "###############################################"
+###############################################
+link
+
+  Linking design 'MIMO'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (10 designs)              /home/IC/chain_test/syn/MIMO.db, etc
+  scmetro_tsmc_cl013g_rvt_ss_1p08v_125c (library) /home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db
+  scmetro_tsmc_cl013g_rvt_tt_1p2v_25c (library) /home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db
+  scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c (library) /home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db
+
+1
+#################### Liniking All The Design Parts #########################
+puts "###############################################"
+###############################################
+puts "######## checking design consistency ##########"
+######## checking design consistency ##########
+puts "###############################################"
+###############################################
+check_design
+ 
+****************************************
+check_design summary:
+Version:     K-2015.06
+Date:        Fri Jul  3 00:09:53 2026
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      1
+    Unconnected ports (LINT-28)                                     1
+
+Cells                                                              58
+    Cells do not drive (LINT-1)                                     3
+    Connected to power or ground (LINT-32)                         45
+    Nets connected to multiple pins on same cell (LINT-33)         10
+--------------------------------------------------------------------------------
+
+Warning: In design 'ClkDiv', cell 'C120' does not drive any nets. (LINT-1)
+Warning: In design 'DUC', cell 'B_4' does not drive any nets. (LINT-1)
+Warning: In design 'counter2bit', cell 'B_0' does not drive any nets. (LINT-1)
+Warning: In design 'FIR', port 'clk' is not connected to any nets. (LINT-28)
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_clk_en' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[7]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[6]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[5]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[4]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[3]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[2]' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[1]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[0]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_clk_en' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[7]' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[6]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[5]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[4]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[3]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[2]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[1]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen128' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[0]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_clk_en' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[7]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[6]' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[5]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[4]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[3]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[2]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[1]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen16' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[0]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_clk_en' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[7]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[6]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[5]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[4]' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[3]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[2]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[1]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen64' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[0]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_clk_en' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[7]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[6]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[5]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[4]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[3]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[2]' is connected to logic 1. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[1]' is connected to logic 0. 
+Warning: In design 'MIMO', a pin on submodule 'gen_4' is connected to logic 1 or logic 0. (LINT-32)
+   Pin 'i_div_ratio[0]' is connected to logic 0. 
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen4'. (LINT-33)
+   Net '*Logic1*' is connected to pins 'i_clk_en', 'i_div_ratio[2]''.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen4'. (LINT-33)
+   Net '*Logic0*' is connected to pins 'i_div_ratio[7]', 'i_div_ratio[6]'', 'i_div_ratio[5]', 'i_div_ratio[4]', 'i_div_ratio[3]', 'i_div_ratio[1]', 'i_div_ratio[0]'.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen128'. (LINT-33)
+   Net '*Logic1*' is connected to pins 'i_clk_en', 'i_div_ratio[7]''.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen128'. (LINT-33)
+   Net '*Logic0*' is connected to pins 'i_div_ratio[6]', 'i_div_ratio[5]'', 'i_div_ratio[4]', 'i_div_ratio[3]', 'i_div_ratio[2]', 'i_div_ratio[1]', 'i_div_ratio[0]'.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen16'. (LINT-33)
+   Net '*Logic1*' is connected to pins 'i_clk_en', 'i_div_ratio[6]''.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen16'. (LINT-33)
+   Net '*Logic0*' is connected to pins 'i_div_ratio[7]', 'i_div_ratio[5]'', 'i_div_ratio[4]', 'i_div_ratio[3]', 'i_div_ratio[2]', 'i_div_ratio[1]', 'i_div_ratio[0]'.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen64'. (LINT-33)
+   Net '*Logic1*' is connected to pins 'i_clk_en', 'i_div_ratio[4]''.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen64'. (LINT-33)
+   Net '*Logic0*' is connected to pins 'i_div_ratio[7]', 'i_div_ratio[6]'', 'i_div_ratio[5]', 'i_div_ratio[3]', 'i_div_ratio[2]', 'i_div_ratio[1]', 'i_div_ratio[0]'.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen_4'. (LINT-33)
+   Net '*Logic1*' is connected to pins 'i_clk_en', 'i_div_ratio[2]''.
+Warning: In design 'MIMO', the same net is connected to more than one pin on submodule 'gen_4'. (LINT-33)
+   Net '*Logic0*' is connected to pins 'i_div_ratio[7]', 'i_div_ratio[6]'', 'i_div_ratio[5]', 'i_div_ratio[4]', 'i_div_ratio[3]', 'i_div_ratio[1]', 'i_div_ratio[0]'.
+1
+############################### Path groups ################################
+puts "###############################################"
+###############################################
+puts "################ Path groups ##################"
+################ Path groups ##################
+puts "###############################################"
+###############################################
+group_path -name INREG -from [all_inputs]
+1
+group_path -name REGOUT -to [all_outputs]
+1
+group_path -name INOUT -from [all_inputs] -to [all_outputs]
+1
+#################### Define Design Constraints #########################
+puts "###############################################"
+###############################################
+puts "############ Design Constraints #### ##########"
+############ Design Constraints #### ##########
+puts "###############################################"
+###############################################
+source -echo ./cons.tcl
+####################################################################################
+# Constraints
+# ----------------------------------------------------------------------------
+#
+# 0. Design Compiler variables
+#
+# 1. Master Clock Definitions
+#
+# 2. Generated Clock Definitions
+#
+# 3. Clock Uncertainties
+#
+# 4. Clock Latencies 
+#
+# 5. Clock Relationships
+#
+# 6. set input/output delay on ports
+#
+# 7. Driving cells
+#
+# 8. Output load
+####################################################################################
+#########################################################
+#### Section 0 : DC Variables ####
+#########################################################
+#################################################################################### 
+# Prevent assign statements in the generated netlist (must be applied before compile command)
+set verilogout_no_tri true
+set_fix_multiple_port_nets -all -buffer_constants -feedthroughs
+####################################################################################
+#########################################################
+#### Section 1 : Clock Definition ####
+#########################################################
+#################################################################################### 
+# 1. Master Clock Definitions 
+# 2. Generated Clock Definitions
+# 3. Clock Latencies
+# 4. Clock Uncertainties
+# 4. Clock Transitions
+####################################################################################
+# REF CLOCK (400 MHz)
+set CLK_NAME REF_CLK
+set CLK_PER 2.5
+# Skew
+set CLK_SETUP_SKEW 0.02
+set CLK_HOLD_SKEW 0.01
+#transition
+set CLK_TRANS 0.05
+#1. Master Clocks
+create_clock -name $CLK_NAME -period $CLK_PER -waveform "0 [expr $CLK_PER/2]" [get_ports clk]
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks $CLK_NAME]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW  [get_clocks $CLK_NAME]
+set_clock_transition  $CLK_TRANS  [get_clocks $CLK_NAME]
+#2. Generated clocks
+#2. Generated clocks
+create_generated_clock -master_clock $CLK_NAME -source [get_ports clk]                        -name "CLK_SEGMA" [get_port gen4/o_div_clk]                        -divide_by 4
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks "CLK_SEGMA"]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW   [get_clocks "CLK_SEGMA"]
+create_generated_clock -master_clock $CLK_NAME -source [get_ports clk]                        -name "CLK_128" [get_port gen128/o_div_clk]                        -divide_by 128
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks "CLK_128"]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW   [get_clocks "CLK_128"]
+create_generated_clock -master_clock $CLK_NAME -source [get_ports clk]                        -name "CLK_64" [get_port gen64/o_div_clk]                        -divide_by 64
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks "CLK_64"]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW   [get_clocks "CLK_64"]
+create_generated_clock -master_clock $CLK_NAME -source [get_ports clk]                        -name "CLK_16" [get_port gen16/o_div_clk]                        -divide_by 16
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks "CLK_16"]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW   [get_clocks "CLK_16"]
+create_generated_clock -master_clock $CLK_NAME -source [get_ports clk]                        -name "CLK_4" [get_port gen_4/o_div_clk]                        -divide_by 4
+set_clock_uncertainty -setup $CLK_SETUP_SKEW [get_clocks "CLK_4"]
+set_clock_uncertainty -hold $CLK_HOLD_SKEW   [get_clocks "CLK_4"]
+set_dont_touch_network [get_clocks "$CLK_NAME CLK_SEGMA CLK_128 CLK_64 CLK_4 CLK_16"]
+####################################################################################
+#########################################################
+#### Section 2 : Clocks Relationship ####
+#########################################################
+####################################################################################
+#set_clock_groups -asynchronous    # -group [get_clocks "$CLK_NAME "]    # -group [get_clocks "CLK_SEGMA"]    # -group [get_clocks "CLK_128"]    # -group [get_clocks "CLK_64"]    # -group [get_clocks "CLK_4"]    #-group [get_clocks  "CLK_16"]
+####################################################################################
+#########################################################
+#### Section 3 : set input/output delay on ports ####
+#########################################################
+####################################################################################
+set in_delay  [expr 0.2*$CLK_PER]
+set out_delay [expr 0.2*$CLK_PER]
+#Constrain Input Paths
+set_input_delay $in_delay -clock $CLK_NAME [get_port I]
+set_input_delay $in_delay -clock $CLK_NAME [get_port Q]
+#Constrain Output Paths
+set_output_delay $out_delay -clock $CLK_NAME [get_port out]
+####################################################################################
+#########################################################
+#### Section 4 : Driving cells ####
+#########################################################
+####################################################################################
+set_driving_cell -library scmetro_tsmc_cl013g_rvt_ss_1p08v_125c -lib_cell BUFX2M -pin Y [get_port I]
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+set_driving_cell -library scmetro_tsmc_cl013g_rvt_ss_1p08v_125c -lib_cell BUFX2M -pin Y [get_port Q]
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+Warning: Design rule attributes from the driving cell will be
+	set on the port. (UID-401)
+####################################################################################
+#########################################################
+#### Section 5 : Output load ####
+#########################################################
+####################################################################################
+set_load 0.8 [get_port out]
+####################################################################################
+#########################################################
+#### Section 6 : Operating Condition ####
+#########################################################
+####################################################################################
+# Define the Worst Library for Max(#setup) analysis
+# Define the Best Library for Min(hold) analysis
+set_operating_conditions -min_library "scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c" -min "scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c" -max_library "scmetro_tsmc_cl013g_rvt_ss_1p08v_125c" -max "scmetro_tsmc_cl013g_rvt_ss_1p08v_125c"
+Using operating conditions 'scmetro_tsmc_cl013g_rvt_ss_1p08v_125c' found in library 'scmetro_tsmc_cl013g_rvt_ss_1p08v_125c'.
+Using operating conditions 'scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c' found in library 'scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c'.
+####################################################################################
+#########################################################
+#### Section 7 : wireload Model ####
+#########################################################
+####################################################################################
+#set_wire_load_model -name tsmc13_wl30 -library scmetro_tsmc_cl013g_rvt_ss_1p08v_125c
+####################################################################################
+###################### Mapping and optimization ########################
+puts "###############################################"
+###############################################
+puts "########## Mapping & Optimization #############"
+########## Mapping & Optimization #############
+puts "###############################################"
+###############################################
+compile -map_effort high
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | K-2015.06-DWBB_201506.0 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+Information: There are 59 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Warning: Operating condition scmetro_tsmc_cl013g_rvt_ss_1p08v_125c set on design MIMO has different process,
+voltage and temperatures parameters than the parameters at which target library 
+scmetro_tsmc_cl013g_rvt_tt_1p2v_25c is characterized. Delays may be inaccurate as a result. (OPT-998)
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'DUC'
+  Processing 'segma_0'
+  Processing 'mux4to1_0'
+  Processing 'counter2bit_0'
+  Processing 'up4_filter_0'
+  Processing 'counter_0'
+  Processing 'hfb_1_0'
+  Processing 'FIR_0'
+  Processing 'ClkDiv_0'
+  Processing 'MIMO'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'segma_1_DW01_sub_0'
+  Processing 'segma_0_DW01_sub_0'
+  Processing 'up4_filter_1_DW01_add_0'
+  Processing 'up4_filter_2_DW01_add_0'
+  Processing 'hfb_1_1_DW01_add_0'
+  Processing 'hfb_1_1_DW01_add_1'
+  Processing 'hfb_1_1_DW01_add_2'
+  Processing 'up4_filter_3_DW01_add_0'
+  Processing 'up4_filter_0_DW01_add_0'
+  Processing 'hfb_1_0_DW01_add_0'
+  Processing 'hfb_1_0_DW01_add_1'
+  Processing 'hfb_1_0_DW01_add_2'
+  Processing 'ClkDiv_1_DW01_inc_0'
+  Processing 'ClkDiv_1_DW01_cmp6_0'
+  Processing 'ClkDiv_1_DW01_cmp6_1'
+  Processing 'ClkDiv_1_DW01_dec_0'
+  Processing 'ClkDiv_2_DW01_inc_0'
+  Processing 'ClkDiv_2_DW01_cmp6_0'
+  Processing 'ClkDiv_2_DW01_cmp6_1'
+  Processing 'ClkDiv_2_DW01_dec_0'
+  Processing 'ClkDiv_3_DW01_inc_0'
+  Processing 'ClkDiv_3_DW01_cmp6_0'
+  Processing 'ClkDiv_3_DW01_cmp6_1'
+  Processing 'ClkDiv_3_DW01_dec_0'
+  Processing 'ClkDiv_4_DW01_inc_0'
+  Processing 'ClkDiv_4_DW01_cmp6_0'
+  Processing 'ClkDiv_4_DW01_cmp6_1'
+  Processing 'ClkDiv_4_DW01_dec_0'
+  Processing 'ClkDiv_0_DW01_inc_0'
+  Processing 'ClkDiv_0_DW01_cmp6_0'
+  Processing 'ClkDiv_0_DW01_cmp6_1'
+  Processing 'ClkDiv_0_DW01_dec_0'
+  Processing 'up4_filter_2_DW01_add_1'
+  Processing 'up4_filter_2_DW01_add_2'
+  Processing 'up4_filter_2_DW01_add_3'
+  Processing 'up4_filter_2_DW01_add_4'
+  Processing 'up4_filter_2_DW01_add_5'
+  Processing 'up4_filter_2_DW01_add_6'
+  Processing 'up4_filter_2_DW01_sub_0'
+  Processing 'up4_filter_2_DW01_add_7'
+  Processing 'up4_filter_2_DW01_sub_1'
+  Processing 'up4_filter_0_DW01_add_1'
+  Processing 'up4_filter_0_DW01_add_2'
+  Processing 'up4_filter_0_DW01_sub_0'
+  Processing 'up4_filter_0_DW01_add_3'
+  Processing 'up4_filter_0_DW01_sub_1'
+  Processing 'up4_filter_0_DW01_add_4'
+  Processing 'up4_filter_0_DW01_add_5'
+  Processing 'up4_filter_0_DW01_add_6'
+  Processing 'up4_filter_0_DW01_add_7'
+  Processing 'hfb_1_1_DW01_add_3'
+  Processing 'hfb_1_1_DW01_add_4'
+  Processing 'hfb_1_1_DW01_add_5'
+  Processing 'hfb_1_1_DW01_add_6'
+  Processing 'hfb_1_1_DW01_sub_0'
+  Processing 'hfb_1_1_DW01_add_7'
+  Processing 'hfb_1_1_DW01_add_8'
+  Processing 'hfb_1_1_DW02_mult_0'
+  Processing 'hfb_1_1_DW01_add_9'
+  Processing 'hfb_1_1_DW02_mult_1'
+  Processing 'hfb_1_1_DW01_add_10'
+  Processing 'hfb_1_1_DW02_mult_2'
+  Processing 'hfb_1_1_DW01_add_11'
+  Processing 'hfb_1_1_DW02_mult_3'
+  Processing 'hfb_1_1_DW01_add_12'
+  Processing 'hfb_1_1_DW01_add_13'
+  Processing 'hfb_1_1_DW01_add_14'
+  Processing 'hfb_1_1_DW01_add_15'
+  Processing 'hfb_1_1_DW01_add_16'
+  Processing 'hfb_1_1_DW01_add_17'
+  Processing 'hfb_1_0_DW01_add_3'
+  Processing 'hfb_1_0_DW01_add_4'
+  Processing 'hfb_1_0_DW01_add_5'
+  Processing 'hfb_1_0_DW01_add_6'
+  Processing 'hfb_1_0_DW01_sub_0'
+  Processing 'hfb_1_0_DW01_add_7'
+  Processing 'hfb_1_0_DW01_add_8'
+  Processing 'hfb_1_0_DW02_mult_0'
+  Processing 'hfb_1_0_DW01_add_9'
+  Processing 'hfb_1_0_DW02_mult_1'
+  Processing 'hfb_1_0_DW01_add_10'
+  Processing 'hfb_1_0_DW02_mult_2'
+  Processing 'hfb_1_0_DW01_add_11'
+  Processing 'hfb_1_0_DW02_mult_3'
+  Processing 'hfb_1_0_DW01_add_12'
+  Processing 'hfb_1_0_DW01_add_13'
+  Processing 'hfb_1_0_DW01_add_14'
+  Processing 'hfb_1_0_DW01_add_15'
+  Processing 'hfb_1_0_DW01_add_16'
+  Processing 'hfb_1_0_DW01_add_17'
+  Processing 'up4_filter_2_DW01_add_8'
+  Processing 'up4_filter_2_DW01_add_9'
+  Processing 'up4_filter_2_DW01_add_10'
+  Processing 'up4_filter_2_DW01_add_11'
+  Processing 'up4_filter_2_DW01_add_12'
+  Processing 'up4_filter_2_DW01_add_13'
+  Processing 'up4_filter_2_DW01_add_14'
+  Processing 'up4_filter_2_DW01_add_15'
+  Processing 'up4_filter_0_DW01_add_8'
+  Processing 'up4_filter_0_DW01_add_9'
+  Processing 'up4_filter_0_DW01_add_10'
+  Processing 'up4_filter_0_DW01_add_11'
+  Processing 'up4_filter_0_DW01_add_12'
+  Processing 'up4_filter_0_DW01_add_13'
+  Processing 'up4_filter_0_DW01_add_14'
+  Processing 'up4_filter_0_DW01_add_15'
+  Processing 'up4_filter_1_DW01_add_1'
+  Processing 'up4_filter_1_DW01_add_2'
+  Processing 'up4_filter_1_DW01_add_3'
+  Processing 'up4_filter_1_DW01_add_4'
+  Processing 'up4_filter_1_DW01_add_5'
+  Processing 'up4_filter_1_DW01_add_6'
+  Processing 'up4_filter_1_DW01_add_7'
+  Processing 'up4_filter_1_DW01_add_8'
+  Processing 'up4_filter_1_DW01_add_9'
+  Processing 'up4_filter_1_DW01_sub_0'
+  Processing 'up4_filter_1_DW01_add_10'
+  Processing 'up4_filter_1_DW01_sub_1'
+  Processing 'up4_filter_1_DW01_add_11'
+  Processing 'up4_filter_1_DW01_add_12'
+  Processing 'up4_filter_1_DW01_add_13'
+  Processing 'up4_filter_1_DW01_add_14'
+  Processing 'up4_filter_1_DW01_add_15'
+  Processing 'up4_filter_3_DW01_add_1'
+  Processing 'up4_filter_3_DW01_add_2'
+  Processing 'up4_filter_3_DW01_add_3'
+  Processing 'up4_filter_3_DW01_add_4'
+  Processing 'up4_filter_3_DW01_add_5'
+  Processing 'up4_filter_3_DW01_add_6'
+  Processing 'up4_filter_3_DW01_add_7'
+  Processing 'up4_filter_3_DW01_add_8'
+  Processing 'up4_filter_3_DW01_add_9'
+  Processing 'up4_filter_3_DW01_sub_0'
+  Processing 'up4_filter_3_DW01_add_10'
+  Processing 'up4_filter_3_DW01_sub_1'
+  Processing 'up4_filter_3_DW01_add_11'
+  Processing 'up4_filter_3_DW01_add_12'
+  Processing 'up4_filter_3_DW01_add_13'
+  Processing 'up4_filter_3_DW01_add_14'
+  Processing 'up4_filter_3_DW01_add_15'
+  Processing 'segma_1_DW01_add_0'
+  Processing 'segma_1_DW01_sub_1'
+  Processing 'segma_0_DW01_add_0'
+  Processing 'segma_0_DW01_sub_1'
+
+  Beginning Mapping Optimizations  (High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:01  290309.5      2.34     108.4       1.2                          
+    0:01:01  290309.5      2.34     108.4       1.2                          
+    0:01:01  290309.5      2.34     108.4       1.2                          
+    0:01:02  290075.4      2.34     107.8       2.7                          
+    0:01:02  290075.4      2.34     107.8       2.7                          
+    0:01:10  127976.7      4.12     224.1       0.7                          
+    0:01:14  125416.2      3.15     134.4       0.7                          
+    0:01:16  124870.2      2.54     101.1       0.7                          
+    0:01:17  124651.4      2.15      80.4       0.7                          
+    0:01:18  124892.6      2.04      76.3       0.7                          
+    0:01:19  124756.1      2.10      79.5       0.7                          
+    0:01:19  125039.7      1.94      72.7       0.7                          
+    0:01:20  124912.6      2.00      73.7       0.7                          
+    0:01:20  124995.0      1.93      66.9       0.7                          
+    0:01:21  124999.7      1.96      68.7       0.7                          
+    0:01:21  125033.8      1.83      65.6       0.7                          
+    0:01:21  125039.7      1.80      65.0       0.7                          
+    0:01:22  125075.0      1.76      56.4       0.7                          
+    0:01:22  125129.1      1.73      53.5       0.7                          
+    0:01:22  125133.8      1.73      53.5       0.7                          
+    0:01:22  125142.0      1.71      53.0       0.7                          
+    0:01:22  125142.0      1.71      53.0       0.7                          
+    0:01:22  125142.0      1.71      53.0       0.7                          
+    0:01:22  125142.0      1.71      53.0       0.7                          
+    0:01:22  125145.6      1.71      53.0       0.0                          
+    0:01:22  125145.6      1.71      53.0       0.0                          
+    0:01:22  125145.6      1.71      53.0       0.0                          
+    0:01:22  125145.6      1.71      53.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:22  125145.6      1.71      53.0       0.0                          
+    0:01:24  125639.8      1.15      29.7       0.0 uut3/acc2_reg[16]/D      
+    0:01:26  125828.1      1.04      25.0       0.0 uut4/acc2_reg[16]/D      
+    0:01:26  126015.2      1.00      22.9       0.0 uut3/acc2_reg[16]/D      
+    0:01:27  126238.7      0.92      21.1       0.0 uut3/acc2_reg[16]/D      
+    0:01:28  126524.7      0.88      19.8       0.0 uut4/acc2_reg[16]/D      
+    0:01:28  126518.8      0.87      19.0       0.0 uut4/acc2_reg[16]/D      
+    0:01:28  126660.0      0.84      17.9       0.0 uut3/acc2_reg[16]/D      
+    0:01:29  126664.7      0.83      17.8       0.0 uut3/acc2_reg[16]/D      
+    0:01:30  126817.7      0.77      16.5       0.0 uut4/acc2_reg[16]/D      
+    0:01:31  126991.8      0.74      15.5       0.0 uut3/acc2_reg[16]/D      
+    0:01:31  127301.3      0.71      14.6       0.0 uut3/acc2_reg[16]/D      
+    0:01:32  127401.3      0.67      13.9       0.0 uut4/acc2_reg[16]/D      
+    0:01:33  127582.5      0.64      12.9       0.0 uut3/acc2_reg[16]/D      
+    0:01:33  127635.5      0.63      12.7       0.0 uut3/acc2_reg[16]/D      
+    0:01:33  127624.9      0.63      12.6       0.0 uut3/acc2_reg[16]/D      
+    0:01:34  127621.4      0.62      12.4       0.0 uut4/acc2_reg[16]/D      
+    0:01:34  127752.0      0.61      12.0       0.0 uut3/acc2_reg[16]/D      
+    0:01:34  127760.2      0.59      11.6       0.0 uut4/acc2_reg[16]/D      
+    0:01:35  127732.0      0.58      11.2       0.0 uut3/acc2_reg[16]/D      
+    0:01:36  127934.4      0.52       7.6       0.2 uut3/acc2_reg[16]/D      
+    0:01:37  128236.8      0.49       7.2       0.2 uut4/acc2_reg[16]/D      
+    0:01:38  128438.0      0.46       6.5       0.2 uut3/acc2_reg[16]/D      
+    0:01:38  128534.5      0.44       5.9       0.2 uut3/acc2_reg[16]/D      
+    0:01:39  128521.5      0.43       5.8       0.2 uut4/acc2_reg[16]/D      
+    0:01:39  128549.8      0.42       5.6       0.2 uut4/acc2_reg[16]/D      
+    0:01:40  128596.8      0.41       5.4       0.2 uut4/acc2_reg[16]/D      
+    0:01:40  128614.5      0.40       5.3       0.2 uut4/acc2_reg[16]/D      
+    0:01:40  128662.7      0.39       4.8       0.2 uut4/acc2_reg[16]/D      
+    0:01:40  128691.0      0.38       4.7       0.2 uut4/acc2_reg[16]/D      
+    0:01:41  128718.0      0.38       4.6       0.2 uut3/acc2_reg[16]/D      
+    0:01:42  128781.6      0.36       4.3       0.2 uut4/acc2_reg[16]/D      
+    0:01:42  128820.4      0.35       4.3       0.2 uut4/acc2_reg[16]/D      
+    0:01:43  128846.3      0.33       4.0       0.2 uut3/acc2_reg[16]/D      
+    0:01:43  128920.4      0.32       3.8       0.2 uut3/acc2_reg[16]/D      
+    0:01:44  129047.5      0.32       3.6       0.2 uut3/acc2_reg[16]/D      
+    0:01:44  129153.4      0.31       3.5       0.2 uut4/acc2_reg[16]/D      
+    0:01:44  129188.7      0.30       3.4       0.2 uut4/acc2_reg[16]/D      
+    0:01:45  129280.5      0.29       3.2       0.2 uut4/acc2_reg[16]/D      
+    0:01:45  129268.7      0.28       3.1       0.2 uut4/acc2_reg[16]/D      
+    0:01:45  129431.1      0.26       2.8       0.2 uut3/acc2_reg[16]/D      
+    0:01:46  129460.5      0.25       2.7       0.2 uut3/acc2_reg[16]/D      
+    0:01:46  129541.7      0.23       2.4       0.2 uut3/acc2_reg[16]/D      
+    0:01:47  129650.0      0.22       2.2       0.2 uut3/acc2_reg[16]/D      
+    0:01:47  129713.5      0.21       2.0       0.2 uut3/acc2_reg[16]/D      
+    0:01:47  129752.4      0.20       1.9       0.2 uut3/acc2_reg[16]/D      
+    0:01:49  129814.7      0.18       1.7       0.2 uut4/acc2_reg[16]/D      
+    0:01:50  129935.9      0.17       1.5       0.2 uut3/acc2_reg[16]/D      
+    0:01:50  129981.8      0.16       1.4       0.2 uut3/acc2_reg[16]/D      
+    0:01:50  130034.8      0.16       1.4       0.2 uut3/acc2_reg[16]/D      
+    0:01:51  130126.5      0.15       1.3       0.2 uut3/acc2_reg[16]/D      
+    0:01:51  130096.0      0.14       1.2       0.2 uut3/acc2_reg[16]/D      
+    0:01:51  130240.7      0.13       1.0       0.2 uut3/acc2_reg[16]/D      
+    0:01:52  130297.2      0.13       0.9       0.2 uut3/acc2_reg[16]/D      
+    0:01:52  130290.1      0.12       0.9       0.2 uut3/acc2_reg[16]/D      
+    0:01:52  130286.6      0.12       0.8       0.2 uut3/acc2_reg[16]/D      
+    0:01:53  130336.0      0.11       0.8       0.2 uut3/acc2_reg[16]/D      
+    0:01:53  130333.6      0.11       0.7       0.2 uut3/acc2_reg[16]/D      
+    0:01:53  130374.8      0.10       0.7       0.2 uut3/acc2_reg[16]/D      
+    0:01:53  130465.4      0.10       0.7       0.2 uut3/acc2_reg[16]/D      
+    0:01:54  130465.4      0.10       0.3       0.2 uut3/acc2_reg[16]/D      
+    0:01:55  130604.3      0.04       0.1       0.2 uut4/acc2_reg[16]/D      
+    0:01:56  130664.3      0.02       0.0       0.2 uut4/acc2_reg[16]/D      
+    0:01:56  130692.5      0.01       0.0       0.2 uut4/acc2_reg[16]/D      
+    0:01:56  130687.8      0.01       0.0       0.2 uut4/acc2_reg[16]/D      
+    0:01:56  130696.1      0.00       0.0       0.2                          
+    0:01:57  130670.2      0.00       0.0       0.2                          
+    0:01:58  130654.9      0.00       0.0       0.2                          
+
+
+  Beginning Design Rule Fixing  (max_transition)
+  ----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:58  130654.9      0.00       0.0       0.2                          
+    0:01:58  130630.2      0.00       0.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:01:58  130630.2      0.00       0.0       0.0                          
+    0:01:58  130630.2      0.00       0.0       0.0                          
+    0:02:00  128999.3      0.19       0.7       0.0                          
+    0:02:00  128769.8      0.19       0.7       0.0                          
+    0:02:00  128705.1      0.19       0.7       0.0                          
+    0:02:00  128685.1      0.19       0.7       0.0                          
+    0:02:01  128674.5      0.19       0.7       0.0                          
+    0:02:01  128674.5      0.19       0.7       0.0                          
+    0:02:01  128659.2      0.06       0.3       0.0 uut4/acc2_reg[16]/D      
+    0:02:02  128707.4      0.03       0.2       0.0 uut4/acc2_reg[16]/D      
+    0:02:02  128756.9      0.03       0.2       0.0 uut4/acc2_reg[16]/D      
+    0:02:03  128754.5      0.02       0.1       0.0 uut4/acc2_reg[16]/D      
+    0:02:03  128775.7      0.00       0.0       0.0                          
+    0:02:04  128776.9      0.00       0.0       0.0                          
+    0:02:04  128768.6      0.00       0.0       0.0                          
+    0:02:05  122105.0      1.58      22.5       0.0                          
+    0:02:05  120887.1      1.55      22.4       0.0                          
+    0:02:05  120517.6      1.54      22.8       0.0                          
+    0:02:05  120438.8      1.54      22.8       0.0                          
+    0:02:05  120437.6      1.54      22.8       0.0                          
+    0:02:05  120437.6      1.54      22.8       0.0                          
+    0:02:05  120437.6      1.54      22.8       0.0                          
+    0:02:05  120437.6      1.54      22.8       0.0                          
+    0:02:06  120931.8      0.97      14.2       0.0 uut3/acc2_reg[16]/D      
+    0:02:07  121166.0      0.72      12.7       0.0 uut4/acc2_reg[16]/D      
+    0:02:07  121586.1      0.54      10.1       0.0 uut3/acc2_reg[16]/D      
+    0:02:08  121929.7      0.45       8.4       0.0 uut3/acc2_reg[16]/D      
+    0:02:08  122188.5      0.38       6.4       0.0 uut3/acc2_reg[16]/D      
+    0:02:09  122487.4      0.32       4.9       0.0 uut3/acc2_reg[16]/D      
+    0:02:10  122605.1      0.29       4.3       0.0 uut4/acc2_reg[17]/D      
+    0:02:10  122906.3      0.24       3.4       0.0 uut3/acc2_reg[16]/D      
+    0:02:13  123428.8      0.00       0.0       0.0                          
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db'
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db'
+Loading db file '/home/IC/chain_test/std_cells/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+1
+set_svf   -off
+1
+#############################################################################
+# Write out Design after initial compile
+#############################################################################
+write_file -format verilog -hierarchy -output MIMO.v
+Writing verilog file '/home/IC/chain_test/syn/MIMO.v'.
+Warning: Verilog writer has added 1 nets to module hfb_1_0_DW02_mult_3 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Warning: Verilog writer has added 13 nets to module hfb_1_0 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 36 nets to module up4_filter_0 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 32 nets to module up4_filter_3 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 1 nets to module hfb_1_1_DW02_mult_3 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 13 nets to module hfb_1_1 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 32 nets to module up4_filter_2 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 32 nets to module up4_filter_1 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+1
+write_file -format ddc -hierarchy -output MIMO.ddc
+Writing ddc file 'MIMO.ddc'.
+1
+write_sdc  -nosplit MIMO.sdc
+1
+write_sdf           MIMO.sdf
+Information: Annotated 'cell' delays are assumed to include load delay. (UID-282)
+Information: Writing timing information to file '/home/IC/chain_test/syn/MIMO.sdf'. (WT-3)
+Information: Updating design information... (UID-85)
+1
+################# reporting #######################
+report_area -hierarchy > Area.rpt
+report_power -hierarchy > power.rpt
+report_timing -max_paths 100 -delay_type min > hold.rpt
+report_timing -max_paths 100 -delay_type max > setup.rpt
+report_clock -attributes > clocks.rpt
+report_constraint -all_violators > constraints.rpt
+################# starting graphical user interface #######################
+gui_start
+Current design is 'MIMO'.
+#exit
+dc_shell> dc_shell> 
